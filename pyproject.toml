@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "subnet-contracts"
+version = "0.1.0"
+description = "Subnet infra contracts"
+authors = ["Marko Culinovic <marko.culinovic@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.10"
+eth-brownie = "^1.18.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.1.0"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+pytest = "^6.2.5"
+
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

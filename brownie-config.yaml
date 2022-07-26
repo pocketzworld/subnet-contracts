@@ -1,0 +1,13 @@
+dotenv: .env
+dependencies:
+  - OpenZeppelin/openzeppelin-contracts@4.5.0
+compiler:
+  solc:
+    version: '0.8.12'
+    remappings:
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0'
+networks:
+  development:
+    verify: False
+    cmd_settings:
+      gas_limit: 30000000
