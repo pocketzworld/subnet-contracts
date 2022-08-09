@@ -1,13 +1,17 @@
 dotenv: .env
 dependencies:
-  - OpenZeppelin/openzeppelin-contracts@4.5.0
+  - OpenZeppelin/openzeppelin-contracts@4.7.2
+  - OpenZeppelin/openzeppelin-contracts-upgradeable@4.7.2
 compiler:
   solc:
     version: '0.8.12'
     remappings:
-      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0'
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.7.2'
+      - '@openzeppelin-upgradeable=OpenZeppelin/openzeppelin-contracts-upgradeable@4.7.2'
 networks:
   development:
     verify: False
     cmd_settings:
       gas_limit: 30000000
+      unlock:
+        - 0x9b10b6a50bf93e0eec102d7251107880f6192022
