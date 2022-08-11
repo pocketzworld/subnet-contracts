@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/utils/Address.sol";
 contract Vault is Initializable, OwnableUpgradeable {
     address constant INITIAL_OWNER = 0x9b10b6A50bf93E0eec102D7251107880F6192022;
 
+    event Withdrawal(address indexed sender, uint256 amount);
+
     // ------------------------------ INITIALIZER ---------------------------------------------------------------------------
     /// Do not leave an implementation contract uninitialized. An uninitialized implementation contract can be taken over by an attacker, which may impact the proxy
     /// Including a constructor to automatically mark it as initialized.
@@ -33,6 +35,7 @@ contract Vault is Initializable, OwnableUpgradeable {
     receive() external payable {}
 
     function withdraw() public onlyOwner {
+        emit Withdrawal(msg.sender, address(this).balance);
         Address.sendValue(payable(owner()), address(this).balance);
     }
 }

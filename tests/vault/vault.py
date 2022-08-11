@@ -47,5 +47,8 @@ def test_vault_withdrawal(
         vault.withdraw({"from": alice})
     assert "revert: Ownable: caller is not the owner" in str(excinfo.value)
 
-    vault.withdraw({"from": vault_owner})
+    tx = vault.withdraw({"from": vault_owner})
     assert vault_owner.balance() == wei_amount
+    assert len(tx.events) == 1
+    assert tx.events[0]["sender"] == vault_owner
+    assert tx.events[0]["amount"] == wei_amount

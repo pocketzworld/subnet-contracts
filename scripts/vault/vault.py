@@ -144,3 +144,20 @@ def print_subnet_setup(post_init: Optional[int] = None):
 
 
 # ---------------------------------------------------------------------------
+
+
+# ----------------- WITHDRAWAL ----------------------------------------------
+def withdraw():
+    account = get_account()
+    vault = Contract.from_abi("Vault", VAULT_PROXY_ADDR, Vault.abi)
+    print(f"Current vault balance: {vault.balance()}")
+    (tx := vault.withdraw({"from": account})).wait(1)
+    sender = tx.events[0]["sender"]
+    amount = tx.events[0]["amount"]
+    print(f"{sender} initiated withdrawal of {amount} Wei")
+    print(f"Vault proxy balance: {vault.balance()} Wei")
+    cost = tx.gas_used * tx.gas_price
+    print(f"Transaction gas fee: {cost} Wei")
+
+
+# ---------------------------------------------------------------------------
