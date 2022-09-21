@@ -16,6 +16,7 @@
 | Description                     | Highrise vision is to use blockchain technology to bring true digital ownership to Highrise citizens. By expanding from a single Highrise 101 tower to multiple self- governed towers, our goal is to become a true digital nation with our own economy and reserve currency. |
 | Site                            |                                                                                                                                                                                                                                                     https://www.highrise.game |
 | Multicall2 contract             |                                                                                                                                                                                                                                    0x0B5d620cF5Bb99e1a58fF6e3628687D51c0Ac94c |
+| Faucet                          |                                                                                                                                                                                                                                    0x2352D20fC81225c8ECD8f6FaA1B37F24FEd450c9 |
 
 ## Fuji Subnet Contracts
 
