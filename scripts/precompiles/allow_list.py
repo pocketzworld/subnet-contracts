@@ -1,4 +1,6 @@
-from typing import Literal
+from typing import Literal, Optional
+
+from eth_account import Account
 
 from ..common import deployer_list, fee_manager, get_account, native_minter
 
@@ -20,8 +22,12 @@ def set_admin(precompile: Precompile, new_admin_address: str):
     interface.setAdmin(new_admin_address, {"from": account}).wait(1)
 
 
-def set_enabled(precompile: Precompile, address: str):
-    account = get_account()
+def set_enabled(
+    precompile: Precompile, address: str, account: Optional[Account] = None
+):
+    print(f"Enabling {precompile} for {address}")
+    if not account:
+        account = get_account()
     interface = fetch_interface(precompile)
     interface.setEnabled(address, {"from": account}).wait(1)
 

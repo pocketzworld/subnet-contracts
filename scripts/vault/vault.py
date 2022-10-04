@@ -88,6 +88,7 @@ def verify(proxy_admin_address: str, vault_address: str, vault_proxy_address: st
 
 
 def init_vault_proxy_admin(account: Optional[Account] = None):
+    print("Initializing vault proxy admin")
     if not account:
         account = get_vault_admin_account()
     vault_proxy_admin = VaultProxyAdmin.at(VAULT_PROXY_ADMIN_ADDR)
@@ -95,6 +96,7 @@ def init_vault_proxy_admin(account: Optional[Account] = None):
 
 
 def init_vault_implementation(account: Optional[Account] = None):
+    print("Initializing vault implementation")
     if not account:
         account = get_vault_admin_account()
     vault = Vault.at(VAULT_IMPL_ADDR)
@@ -102,6 +104,7 @@ def init_vault_implementation(account: Optional[Account] = None):
 
 
 def init_vault_proxy(account: Optional[Account] = None):
+    print("Initializing vault proxy")
     if not account:
         account = get_vault_admin_account()
     proxy = VaultProxy.at(VAULT_PROXY_ADDR)

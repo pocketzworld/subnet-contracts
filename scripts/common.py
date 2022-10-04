@@ -2,7 +2,7 @@ import os
 from typing import Any, NewType, Optional
 
 import eth_utils
-from brownie import accounts, config, interface, network, project
+from brownie import accounts, config, interface, network, project, web3
 from brownie.network.contract import ContractTx, InterfaceContainer
 from eth_account import Account
 
@@ -122,3 +122,10 @@ def upgrade(
 def load_openzeppelin() -> Project:
     oz = project.load(config["dependencies"][0])
     return oz
+
+
+def fund_account(account: str, amount: int, funded_account: Optional[Account] = None):
+    print(f"Funding {account} with {amount}")
+    if not funded_account:
+        funded_account = get_account()
+    funded_account.transfer(account, web3.toWei(amount, "ether")).wait(1)
