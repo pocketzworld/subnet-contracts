@@ -3,7 +3,7 @@ from typing import Optional
 from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin
 from eth_account import Account
 
-from ..common import encode_function_data, get_account
+from ..common import encode_function_data, get_account, get_vault_admin_account
 
 # Subnet contract addresses defined in genesis
 VAULT_PROXY_ADMIN_ADDR = "0x0300000000000000000000000000000000000000"
@@ -89,21 +89,21 @@ def verify(proxy_admin_address: str, vault_address: str, vault_proxy_address: st
 
 def init_vault_proxy_admin(account: Optional[Account] = None):
     if not account:
-        account = get_account()
+        account = get_vault_admin_account()
     vault_proxy_admin = VaultProxyAdmin.at(VAULT_PROXY_ADMIN_ADDR)
     vault_proxy_admin.init({"from": account})
 
 
 def init_vault_implementation(account: Optional[Account] = None):
     if not account:
-        account = get_account()
+        account = get_vault_admin_account()
     vault = Vault.at(VAULT_IMPL_ADDR)
     vault.initialize({"from": account, "gas_limit": 2000000})
 
 
 def init_vault_proxy(account: Optional[Account] = None):
     if not account:
-        account = get_account()
+        account = get_vault_admin_account()
     proxy = VaultProxy.at(VAULT_PROXY_ADDR)
     proxy.init({"from": account, "gas_limit": 2000000})
 
@@ -112,7 +112,7 @@ def init_vault_proxy(account: Optional[Account] = None):
 
 
 def init_subnet():
-    account = get_account()
+    account = get_vault_admin_account()
     init_vault_proxy_admin(account)
     init_vault_implementation(account)
     init_vault_proxy(account)
@@ -148,7 +148,7 @@ def print_subnet_setup(post_init: Optional[int] = None):
 
 # ----------------- WITHDRAWAL ----------------------------------------------
 def withdraw():
-    account = get_account()
+    account = get_vault_admin_account()
     vault = Contract.from_abi("Vault", VAULT_PROXY_ADDR, Vault.abi)
     print(f"Current vault balance: {vault.balance()}")
     (tx := vault.withdraw({"from": account})).wait(1)

@@ -7,21 +7,35 @@ from brownie.network.contract import ContractTx, InterfaceContainer
 from eth_account import Account
 
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local"]
-SUBNET_ENVIRONMENTS = ["avalanche-local-subnet", "dev-subnet"]
-AVAX_TEST_C_CHAIN = ["avax-test"]
+SUBNET_ENVIRONMENTS = [
+    "highrise-local",
+    "highrise-devnet",
+]
+LOCAL_DEV_SUBNETS = ["local-dev1", "local-dev2"]
+HIGHRISE_TESTNET = "highrise-testnet"
 
 Project = NewType("Project", Any)
 
 
 def get_account() -> Account:
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+    active_network = network.show_active()
+    if active_network in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         return accounts[0]
+    elif active_network == HIGHRISE_TESTNET:
+        return accounts.load(os.getenv("TESTNET_ACCOUNT_NAME"))
     else:
         return accounts.load(os.getenv("DEV_ACCOUNT_NAME"))
 
 
+def get_vault_admin_account() -> Account:
+    return accounts.load(os.getenv("TESTNET_ACCOUNT_NAME"))
+
+
 def native_minter() -> InterfaceContainer:
-    if curr_network := network.show_active() not in SUBNET_ENVIRONMENTS:
+    if (
+        curr_network := network.show_active()
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+    ):
         raise Exception(f"Native minter not accessible on network {curr_network}")
     nm_address = os.getenv("NATIVE_MINTER_ADDRESS")
     if not nm_address:
@@ -30,7 +44,10 @@ def native_minter() -> InterfaceContainer:
 
 
 def fee_manager() -> InterfaceContainer:
-    if curr_network := network.show_active() not in SUBNET_ENVIRONMENTS:
+    if (
+        curr_network := network.show_active()
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+    ):
         raise Exception(f"Fee manager not accessible on network {curr_network}")
     fm_address = os.getenv("FEE_MANAGER_ADDRESS")
     if not fm_address:
@@ -39,7 +56,10 @@ def fee_manager() -> InterfaceContainer:
 
 
 def deployer_list() -> InterfaceContainer:
-    if curr_network := network.show_active() not in SUBNET_ENVIRONMENTS:
+    if (
+        curr_network := network.show_active()
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+    ):
         raise Exception(f"Deployer list not accessible on network {curr_network}")
     deployer_list_address = os.getenv("DEPLOYER_LIST_ADDRESS")
     if not deployer_list_address:
