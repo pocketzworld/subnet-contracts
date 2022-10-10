@@ -15,8 +15,6 @@ def init_dev_subnet():
     fund_account(vault_admin_account.address, 1, account)
     fund_account(CONST_ADDRESS_DEPLOYER_ACCOUNT, 1, account)
     fund_account(GATEWAY_DEPLOYER_ACCOUNT, 1, account)
-    # Update gas limit for bridge
-    set_fee_config("DEV", account)
     # Allow deployments for bridge
     set_enabled("deployer_list", CONST_ADDRESS_DEPLOYER_ACCOUNT, account)
     set_enabled("deployer_list", GATEWAY_DEPLOYER_ACCOUNT, account)
@@ -24,3 +22,5 @@ def init_dev_subnet():
     # Init vault
     init_subnet()
     print_subnet_setup(1)
+    # Update gas limit for bridge
+    set_fee_config("DEV", account)

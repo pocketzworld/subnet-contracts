@@ -1,6 +1,6 @@
 from typing import Optional
 
-from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin
+from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin, web3
 from eth_account import Account
 
 from ..common import encode_function_data, get_account, get_vault_admin_account
@@ -92,7 +92,7 @@ def init_vault_proxy_admin(account: Optional[Account] = None):
     if not account:
         account = get_vault_admin_account()
     vault_proxy_admin = VaultProxyAdmin.at(VAULT_PROXY_ADMIN_ADDR)
-    vault_proxy_admin.init({"from": account})
+    vault_proxy_admin.init({"from": account}).wait(1)
 
 
 def init_vault_implementation(account: Optional[Account] = None):
@@ -100,7 +100,7 @@ def init_vault_implementation(account: Optional[Account] = None):
     if not account:
         account = get_vault_admin_account()
     vault = Vault.at(VAULT_IMPL_ADDR)
-    vault.initialize({"from": account, "gas_limit": 2000000})
+    vault.initialize({"from": account, "gas_limit": 2000000}).wait(1)
 
 
 def init_vault_proxy(account: Optional[Account] = None):
@@ -108,10 +108,10 @@ def init_vault_proxy(account: Optional[Account] = None):
     if not account:
         account = get_vault_admin_account()
     proxy = VaultProxy.at(VAULT_PROXY_ADDR)
-    proxy.init({"from": account, "gas_limit": 2000000})
+    proxy.init({"from": account, "gas_limit": 2000000}).wait(1)
 
     vault_proxy = Contract.from_abi("Vault", VAULT_PROXY_ADDR, Vault.abi)
-    vault_proxy.initialize({"from": account, "gas_limit": 2000000})
+    vault_proxy.initialize({"from": account, "gas_limit": 2000000}).wait(1)
 
 
 def init_subnet():
@@ -161,6 +161,14 @@ def withdraw():
     print(f"Vault proxy balance: {vault.balance()} Wei")
     cost = tx.gas_used * tx.gas_price
     print(f"Transaction gas fee: {cost} Wei")
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------- VAULT BALANCE --------------------------------------------
+def vault_balance():
+    vault = Contract.from_abi("Vault", VAULT_PROXY_ADDR, Vault.abi)
+    print(f"Current vault balance: {vault.balance()}")
 
 
 # ---------------------------------------------------------------------------

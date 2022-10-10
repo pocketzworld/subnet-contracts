@@ -34,7 +34,7 @@ def get_vault_admin_account() -> Account:
 def native_minter() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS + [HIGHRISE_TESTNET]
     ):
         raise Exception(f"Native minter not accessible on network {curr_network}")
     nm_address = os.getenv("NATIVE_MINTER_ADDRESS")
@@ -46,7 +46,7 @@ def native_minter() -> InterfaceContainer:
 def fee_manager() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS + [HIGHRISE_TESTNET]
     ):
         raise Exception(f"Fee manager not accessible on network {curr_network}")
     fm_address = os.getenv("FEE_MANAGER_ADDRESS")
@@ -58,7 +58,7 @@ def fee_manager() -> InterfaceContainer:
 def deployer_list() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS
+        not in SUBNET_ENVIRONMENTS + LOCAL_DEV_SUBNETS + [HIGHRISE_TESTNET]
     ):
         raise Exception(f"Deployer list not accessible on network {curr_network}")
     deployer_list_address = os.getenv("DEPLOYER_LIST_ADDRESS")
