@@ -6,7 +6,8 @@ import "@openzeppelin-upgradeable/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
 contract HRVault is Initializable, OwnableUpgradeable {
-    address public constant INITIAL_OWNER = 0x9b10b6A50bf93E0eec102D7251107880F6192022;
+    address public constant INITIAL_OWNER =
+        0x9b10b6A50bf93E0eec102D7251107880F6192022;
 
     event Withdrawal(address indexed sender, uint256 amount);
 
@@ -29,9 +30,6 @@ contract HRVault is Initializable, OwnableUpgradeable {
     function __Vault_init_unchained() internal onlyInitializing {
         _transferOwnership(INITIAL_OWNER);
     }
-
-    // Function to handle plain ether transactions
-    receive() external payable {}
 
     function withdraw() public onlyOwner {
         emit Withdrawal(msg.sender, address(this).balance);
