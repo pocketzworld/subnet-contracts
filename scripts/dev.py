@@ -5,7 +5,6 @@ from .vault.vault import init_subnet, print_subnet_setup
 
 CONST_ADDRESS_DEPLOYER_ACCOUNT = "0x6F2D0eB998F77595621DB2805872A894F0F1DEfB"
 GATEWAY_DEPLOYER_ACCOUNT = "0xBa86A5719722B02a5D5e388999C25f3333c7A9fb"
-CONST_ADDRESS_DEPLOYER = "0x0000000000000000000000000000000000000000"
 
 
 def init_dev_subnet():
@@ -18,7 +17,6 @@ def init_dev_subnet():
     # Allow deployments for bridge
     set_enabled("deployer_list", CONST_ADDRESS_DEPLOYER_ACCOUNT, account)
     set_enabled("deployer_list", GATEWAY_DEPLOYER_ACCOUNT, account)
-    set_enabled("deployer_list", CONST_ADDRESS_DEPLOYER, account)
     # Init vault
     init_subnet()
     print_subnet_setup(1)
