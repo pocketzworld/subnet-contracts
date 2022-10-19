@@ -8,7 +8,8 @@ contract HRVaultProxy is TransparentUpgradeableProxy {
         0x0300000000000000000000000000000000000000;
     address public constant INITIAL_LOGIC_ADDRESS =
         0x0300000000000000000000000000000000000001;
-    address public constant INITIAL_OWNER = 0x9b10b6A50bf93E0eec102D7251107880F6192022;
+    address public constant INITIAL_OWNER =
+        0x9b10b6A50bf93E0eec102D7251107880F6192022;
 
     constructor(
         address _logic,
