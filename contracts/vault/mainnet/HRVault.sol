@@ -33,6 +33,9 @@ contract HRVault is Initializable, OwnableUpgradeable {
 
     function withdraw() public onlyOwner {
         emit Withdrawal(msg.sender, address(this).balance);
-        AddressUpgradeable.sendValue(payable(msg.sender), address(this).balance);
+        AddressUpgradeable.sendValue(
+            payable(msg.sender),
+            address(this).balance
+        );
     }
 }
