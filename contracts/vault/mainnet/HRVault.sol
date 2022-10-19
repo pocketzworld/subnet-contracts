@@ -23,7 +23,6 @@ contract HRVault is Initializable, OwnableUpgradeable {
     }
 
     function __Vault_init() internal onlyInitializing {
-        __Ownable_init();
         __Vault_init_unchained();
     }
 
