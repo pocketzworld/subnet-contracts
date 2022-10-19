@@ -3,7 +3,7 @@ pragma solidity =0.8.12;
 
 import "@openzeppelin-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import "@openzeppelin-upgradeable/contracts/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin-upgradeable/contracts/utils/AddressUpgradeable.sol";
 
 contract HRVault is Initializable, OwnableUpgradeable {
     address public constant INITIAL_OWNER =
@@ -33,6 +33,6 @@ contract HRVault is Initializable, OwnableUpgradeable {
 
     function withdraw() public onlyOwner {
         emit Withdrawal(msg.sender, address(this).balance);
-        Address.sendValue(payable(owner()), address(this).balance);
+        AddressUpgradeable.sendValue(payable(msg.sender), address(this).balance);
     }
 }
