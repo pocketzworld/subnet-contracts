@@ -12,15 +12,7 @@ contract HRVaultProxyAdmin is ProxyAdmin {
         _;
     }
 
-    modifier onlyAdmin() {
-        require(
-            msg.sender == INITIAL_OWNER,
-            "Only owner can initialize proxy admin"
-        );
-        _;
-    }
-
-    function init() public onlyAdmin notInitialized {
+    function init() public notInitialized {
         _transferOwnership(INITIAL_OWNER);
     }
 }
