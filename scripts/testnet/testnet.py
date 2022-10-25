@@ -1,5 +1,5 @@
-from .common import fund_account, get_account
-from .precompiles.allow_list import set_enabled
+from ..common import fund_account, get_account
+from ..precompiles.allow_list import set_enabled
 
 GATEWAY_DEPLOYER = "0xB8Cd93C83A974649D76B1c19f311f639e62272BC"
 CONST_ADRESS_DEPLOYER_DEPLOYER = "0xe86375704cdb8491a5ed82d90dcece02ee0ac25f"

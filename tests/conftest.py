@@ -24,4 +24,9 @@ def alice() -> LocalAccount:
 
 @pytest.fixture
 def vault_owner() -> LocalAccount:
+    return accounts[-3]
+
+
+@pytest.fixture
+def hr_vault_owner() -> LocalAccount:
     return accounts[-2]

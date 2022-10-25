@@ -1,7 +1,7 @@
-from .common import fund_account, get_account, get_vault_admin_account
-from .precompiles.allow_list import set_enabled
-from .precompiles.fee_manager import set_fee_config
-from .vault.vault import init_subnet, print_subnet_setup
+from ..common import fund_account, get_account, get_vault_admin_account
+from ..precompiles.allow_list import set_enabled
+from ..precompiles.fee_manager import set_fee_config
+from ..vault.testnet.vault import init_subnet, print_subnet_setup
 
 CONST_ADDRESS_DEPLOYER_ACCOUNT = "0x6F2D0eB998F77595621DB2805872A894F0F1DEfB"
 GATEWAY_DEPLOYER_ACCOUNT = "0xBa86A5719722B02a5D5e388999C25f3333c7A9fb"
