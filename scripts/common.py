@@ -13,6 +13,8 @@ SUBNET_ENVIRONMENTS = [
 ]
 DEV_SUBNETS = ["local-dev1", "local-dev2", "dev-c-chain", "dev-highrise"]
 HIGHRISE_TESTNET = "highrise-testnet"
+HIGHRISE_MAINNET_TEST = "mainnet-test"
+HIGHRISE_MAINNET = "highrise-mainnet"
 
 Project = NewType("Project", Any)
 
@@ -23,18 +25,25 @@ def get_account() -> Account:
         return accounts[0]
     elif active_network == HIGHRISE_TESTNET:
         return accounts.load(os.getenv("TESTNET_ACCOUNT_NAME"))
+    elif active_network in [HIGHRISE_MAINNET_TEST, HIGHRISE_MAINNET]:
+        return accounts.load(os.getenv("MAINNET_ACCOUNT_NAME"))
     else:
         return accounts.load(os.getenv("DEV_ACCOUNT_NAME"))
 
 
 def get_vault_admin_account() -> Account:
-    return accounts.load(os.getenv("TESTNET_ACCOUNT_NAME"))
+    if network.show_active() in [HIGHRISE_MAINNET, HIGHRISE_MAINNET_TEST]:
+        return accounts.load(os.getenv("MAINNET_ACCOUNT_NAME"))
+    else:
+        return accounts.load(os.getenv("TESTNET_ACCOUNT_NAME"))
 
 
 def native_minter() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + DEV_SUBNETS + [HIGHRISE_TESTNET]
+        not in SUBNET_ENVIRONMENTS
+        + DEV_SUBNETS
+        + [HIGHRISE_TESTNET, HIGHRISE_MAINNET, HIGHRISE_MAINNET_TEST]
     ):
         raise Exception(f"Native minter not accessible on network {curr_network}")
     nm_address = os.getenv("NATIVE_MINTER_ADDRESS")
@@ -46,7 +55,9 @@ def native_minter() -> InterfaceContainer:
 def fee_manager() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + DEV_SUBNETS + [HIGHRISE_TESTNET]
+        not in SUBNET_ENVIRONMENTS
+        + DEV_SUBNETS
+        + [HIGHRISE_TESTNET, HIGHRISE_MAINNET_TEST, HIGHRISE_MAINNET]
     ):
         raise Exception(f"Fee manager not accessible on network {curr_network}")
     fm_address = os.getenv("FEE_MANAGER_ADDRESS")
@@ -58,7 +69,9 @@ def fee_manager() -> InterfaceContainer:
 def deployer_list() -> InterfaceContainer:
     if (
         curr_network := network.show_active()
-        not in SUBNET_ENVIRONMENTS + DEV_SUBNETS + [HIGHRISE_TESTNET]
+        not in SUBNET_ENVIRONMENTS
+        + DEV_SUBNETS
+        + [HIGHRISE_TESTNET, HIGHRISE_MAINNET, HIGHRISE_MAINNET_TEST]
     ):
         raise Exception(f"Deployer list not accessible on network {curr_network}")
     deployer_list_address = os.getenv("DEPLOYER_LIST_ADDRESS")

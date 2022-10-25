@@ -1,9 +1,9 @@
 from typing import Optional
 
-from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin, web3
+from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin
 from eth_account import Account
 
-from ..common import encode_function_data, get_account, get_vault_admin_account
+from ...common import encode_function_data, get_account, get_vault_admin_account
 
 # Subnet contract addresses defined in genesis
 VAULT_PROXY_ADMIN_ADDR = "0x0300000000000000000000000000000000000000"
@@ -166,6 +166,8 @@ def withdraw():
 # ---------------------------------------------------------------------------
 
 # ---------------- VAULT BALANCE --------------------------------------------
+
+
 def vault_balance():
     vault = Contract.from_abi("Vault", VAULT_PROXY_ADDR, Vault.abi)
     print(f"Current vault balance: {vault.balance()}")

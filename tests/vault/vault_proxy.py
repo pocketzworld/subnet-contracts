@@ -14,7 +14,7 @@ def test_init_success(vault_proxy: ProjectContract):
 
 
 def test_init_proxy_only_once(admin: Account, vault_proxy: ProjectContract):
-    vault = Contract.from_abi("HighriseLand", vault_proxy.address, Vault.abi)
+    vault = Contract.from_abi("Vault", vault_proxy.address, Vault.abi)
     with pytest.raises(exceptions.VirtualMachineError) as excinfo:
         vault.initialize({"from": admin})
     assert "revert: Initializable: contract is already initialized" in str(

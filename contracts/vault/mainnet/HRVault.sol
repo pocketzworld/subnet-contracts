@@ -7,7 +7,7 @@ import "@openzeppelin-upgradeable/contracts/utils/AddressUpgradeable.sol";
 
 contract HRVault is Initializable, OwnableUpgradeable {
     address public constant INITIAL_OWNER =
-        0x9b10b6A50bf93E0eec102D7251107880F6192022;
+        0x7e978A9169e1D06066d9E5DDbf19d15Ea4b913a9;
 
     event Withdrawal(address indexed sender, uint256 amount);
 

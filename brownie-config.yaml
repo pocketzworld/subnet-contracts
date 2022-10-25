@@ -14,4 +14,5 @@ networks:
     cmd_settings:
       gas_limit: 30000000
       unlock:
-        - 0x9b10b6a50bf93e0eec102d7251107880f6192022
+        - 0x9b10b6a50bf93e0eec102d7251107880f6192022 # Testnet account
+        - 0x7e978A9169e1D06066d9E5DDbf19d15Ea4b913a9 # Mainnet account
