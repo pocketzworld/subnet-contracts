@@ -193,3 +193,5 @@ def test():
     test_allow_list(vault_admin_account, dev_account, "native_minter")
     test_allow_list(vault_admin_account, dev_account, "deployer_list")
     test_allow_list(vault_admin_account, dev_account, "fee_config_manager")
+    print("------------------------------------------------------------")
+    print("SUBNET SETUP IS VALID")
