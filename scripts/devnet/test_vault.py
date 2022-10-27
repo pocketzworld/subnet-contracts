@@ -244,5 +244,9 @@ def upgrade_vault_v2():
 
     balance_after = account.balance()
     vault_balance_after = vault_proxy_v2.balance()
-    print(balance_after == balance_before - cost + vault_balance_before)
-    print(vault_balance_after == cost)
+    user_balance_check = balance_after == balance_before - cost + vault_balance_before
+    vault_balance_check = vault_balance_after == cost
+    if user_balance_check and vault_balance_check:
+        print(f"SUCCESS - Balanche check: {user_balance_check} {vault_balance_check}")
+    else:
+        print("FAILURE - balance check")
