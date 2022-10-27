@@ -4,11 +4,7 @@ from brownie import Contract, HRVault, HRVaultProxy, HRVaultProxyAdmin
 from eth_account import Account
 
 from ...common import get_vault_admin_account
-
-# Subnet contract addresses defined in genesis
-VAULT_PROXY_ADMIN_ADDR = "0x0300000000000000000000000000000000000000"
-VAULT_IMPL_ADDR = "0x0300000000000000000000000000000000000001"
-VAULT_PROXY_ADDR = "0x0100000000000000000000000000000000000000"
+from .. import VAULT_IMPL_ADDR, VAULT_PROXY_ADDR, VAULT_PROXY_ADMIN_ADDR
 
 # -------------- INIT FUNCTIONS FOR SUBNET ----------------------------------
 
@@ -95,7 +91,7 @@ def withdraw():
 
 
 def vault_balance():
-    vault = Contract.from_abi("Vault", VAULT_PROXY_ADDR, HRVault.abi)
+    vault = Contract.from_abi("HRVault", VAULT_PROXY_ADDR, HRVault.abi)
     print(f"Current vault balance: {vault.balance()}")
     return vault.balance()
 

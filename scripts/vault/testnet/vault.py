@@ -4,11 +4,7 @@ from brownie import Contract, Vault, VaultProxy, VaultProxyAdmin
 from eth_account import Account
 
 from ...common import encode_function_data, get_account, get_vault_admin_account
-
-# Subnet contract addresses defined in genesis
-VAULT_PROXY_ADMIN_ADDR = "0x0300000000000000000000000000000000000000"
-VAULT_IMPL_ADDR = "0x0300000000000000000000000000000000000001"
-VAULT_PROXY_ADDR = "0x0100000000000000000000000000000000000000"
+from .. import VAULT_IMPL_ADDR, VAULT_PROXY_ADDR, VAULT_PROXY_ADMIN_ADDR
 
 # ------------------ DEPLOYMENT HELPERS FOR C-CHAIN TESTING -----------------
 
